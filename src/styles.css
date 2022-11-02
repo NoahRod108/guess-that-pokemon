@@ -2,10 +2,21 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 1em;
+    font-size: clamp(.5rem, 2.5vmin, 1.5rem);
 }
 
 .tile-container{
     max-width: 700px;
+    background-color: rgba(0,0,0,0.5);
     margin: 0 auto;
     margin-top: 10vh;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -18,7 +29,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    gap: 1rem;
+    gap: .5rem;
     margin: 2rem;
     grid-template-columns: repeat(5, 7rem);
     padding: 1rem;
@@ -27,3 +38,37 @@
 .tile{
     background: url('./images/test2.jpg');
 }
+
+.keyboard {
+    display: grid;
+    grid-template-columns: repeat(20, minmax(auto, 1.25em));
+    grid-auto-rows: 3em;
+    gap: .25em;
+    justify-content: center;
+    margin-top: 24px;
+  }
+
+  .key {
+    font-size: inherit;
+    grid-column: span 2;
+    border: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: hsl(
+      var(--hue, 200),
+      var(--saturation, 1%),
+      calc(var(--lightness-offset, 0%) + var(--lightness, 51%))
+    );
+    color: white;
+    fill: white;
+    text-transform: uppercase;
+    border-radius: .25em;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .key.large {
+    grid-column: span 3;
+  }

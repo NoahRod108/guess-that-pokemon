@@ -7,20 +7,18 @@ for(let i = 0; i < 25; i++){
     let tile={
         id: i,
         top: -(Math.floor(i / 5)) * 85,
-        left: i < 5 ? i * 128 : -(i % 5) * 128
+        left: i < -5 ? i * 128 : -(i % 5) * 128
     }
     tilesArray.push(tile);
 }
 
 const Tile = () => {
-  return (
-    <div className="tile-container">
-        <div className="tile-grid">
-            {tilesArray.map((tile) =>(
-                <div key={tile.id} className="tile" style={{backgroundPosition: `-${tile.left}px -${tile.top}px`, height: `${85}px`, width: `${128}`}}>{tile.id}</div>
-            ))}
-        </div>
-    </div>
+  return (   
+    <>
+        {tilesArray.map((tile) =>(
+            <div key={tile.id} className="tile" style={{backgroundPosition: `${tile.left}px ${tile.top}px`, height: `${80}px`, width: `${108}px`}}></div>
+        ))}
+    </> 
   )
 }
 
