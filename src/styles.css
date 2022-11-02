@@ -1,0 +1,26 @@
+*, *:after, *:before{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.tile-container{
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 10vh;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 20px;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.tile-grid{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    margin: 2rem;
+    grid-template-columns: repeat(5, 6rem);
+    grid-template-rows: minmax(7rem, auto) repeat(5, 6rem);
+    padding: 1rem;
+}
