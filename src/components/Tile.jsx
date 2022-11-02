@@ -2,12 +2,12 @@ import React from 'react'
 
 let tilesArray = [];
 
-for(let i = 0; i < 24; i++){
-    //216 is divided by 5 same with 384 - image is 1000 x 667
+for(let i = 0; i < 25; i++){
+    //85 is divided by 5 same with 128 - image is 640 x 427
     let tile={
         id: i,
-        top: -(Math.floor(i / 5)) * 216,
-        left: i < 5 ? i * 384 : -(i % 5) * 384
+        top: -(Math.floor(i / 5)) * 85,
+        left: i < 5 ? i * 128 : -(i % 5) * 128
     }
     tilesArray.push(tile);
 }
@@ -17,7 +17,7 @@ const Tile = () => {
     <div className="tile-container">
         <div className="tile-grid">
             {tilesArray.map((tile) =>(
-                <div key={tile.id} className="tile" style={{top: `${tile.top}`, left: `${tile.left}`}}></div>
+                <div key={tile.id} className="tile" style={{backgroundPosition: `-${tile.left}px -${tile.top}px`, height: `${85}px`, width: `${128}`}}>{tile.id}</div>
             ))}
         </div>
     </div>

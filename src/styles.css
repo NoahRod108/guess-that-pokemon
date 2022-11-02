@@ -5,7 +5,7 @@
 }
 
 .tile-container{
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto;
     margin-top: 10vh;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -20,7 +20,10 @@
     text-align: center;
     gap: 1rem;
     margin: 2rem;
-    grid-template-columns: repeat(5, 6rem);
-    grid-template-rows: minmax(7rem, auto) repeat(5, 6rem);
+    grid-template-columns: repeat(5, 7rem);
     padding: 1rem;
+}
+
+.tile{
+    background: url('./images/test2.jpg');
 }
