@@ -35,9 +35,34 @@ body{
     padding: 1rem;
 }
 
-.tile{
+.tile[data-state="active"]{
     background: url('./images/test2.jpg');
+    border: 0.05em solid rgba(255,255,255);
 }
+.tile[data-state="inactive"]{
+  background-color: rgba(255,255,255);
+}
+
+.guess{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2em;
+}
+
+.guess > input{
+  width: 100%;
+  font-size: 2em;
+  text-align: center;
+  background-color: transparent;
+  border: none;
+  color: rgba(255, 255, 255);
+}
+
+.guess > input:focus{
+  outline: none;
+}
+
 
 .keyboard {
     display: grid;
@@ -56,11 +81,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: hsl(
-      var(--hue, 200),
-      var(--saturation, 1%),
-      calc(var(--lightness-offset, 0%) + var(--lightness, 51%))
-    );
+    background-color: rgba(255,0,0,0.8);
     color: white;
     fill: white;
     text-transform: uppercase;
@@ -68,7 +89,17 @@ body{
     cursor: pointer;
     user-select: none;
   }
+
+  .key:hover, .key:focus{
+    background-color: rgba(255,0,0,1.2);
+  }
   
+  .key > svg{
+    width: 1.7em;
+    height: 1.75em;
+  }
+
+
   .key.large {
     grid-column: span 3;
   }

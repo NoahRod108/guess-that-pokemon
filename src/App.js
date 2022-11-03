@@ -2,12 +2,93 @@ import Tile from './components/Tile';
 import './styles.css';
 
 function App() {
+    const pokemon = [
+        {
+            name: "charizard",
+            url: "./images/test2.jpg",
+        }
+    ]
+
+    const firstGen = [
+        {
+            name: "charizard",
+            url: "./images/test2.jpg",
+        }
+    ]
+
+    const pokemonGuess = document.getElementById("data-guess");
+
+    startGame();
+
+    function startGame() {
+        document.addEventListener("click", handleMouseClick);
+        document.addEventListener("keydown", handleKeyPress);
+    }
+
+    function handleMouseClick(e) {
+        if(e.target.matches("[data-key]")){
+            pressKey(e.target.dataset.key);
+            return;
+        }
+
+        if(e.target.matches("[data-enter]")){
+            submitGuess();
+            return;
+        }
+
+        if(e.target.matches("[data-delete]")){
+            deleteKey();
+            return;
+        }
+    }
+
+    function handleKeyPress(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        if(e.key === 'Enter'){
+            submitGuess();
+            return;
+        }
+
+        if(e.key === 'Backspace' || e.key === "Delete"){
+            deleteKey();
+            return;
+        }
+
+        if(e.key.match(/^[a-z]$/)){
+            pressKey(e.key);
+            return;
+        }
+    }
+
+    // function stopGame() {
+    //     document.removeEventListener("click", handleMouseClick);
+    //     document.removeEventListener("keydown", handleKeyPress);
+    // }
+
+    function pressKey(key){
+        console.log(key)
+        pokemonGuess.value += key
+    }
+
+    function submitGuess(key){
+
+    }
+
+    function deleteKey(encodeURI){
+
+    }
+
   return (
     <>
         <div className="tile-container">
             <div className="tile-grid">
-                <Tile />
+                <Tile name={pokemon.name} url={pokemon.url}/>
             </div>
+        </div>
+        <div className="guess">
+            <input data-guess type="text" />
         </div>
         <div className="keyboard">
             <div className="key" data-key="Q">Q</div>

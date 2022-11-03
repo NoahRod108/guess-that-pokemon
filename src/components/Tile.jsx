@@ -12,11 +12,11 @@ for(let i = 0; i < 25; i++){
     tilesArray.push(tile);
 }
 
-const Tile = () => {
+const Tile = ({name, url}) => {
   return (   
     <>
         {tilesArray.map((tile) =>(
-            <div key={tile.id} className="tile" style={{backgroundPosition: `${tile.left}px ${tile.top}px`, height: `${80}px`, width: `${108}px`}}></div>
+            <div key={tile.id} className="tile" data-state="inactive" style={{backgroundPosition: `${tile.left}px ${tile.top}px`, height: `${80}px`, width: `${108}px`, backgroundImage: `${url}`}}></div>
         ))}
     </> 
   )
