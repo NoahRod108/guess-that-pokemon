@@ -14,11 +14,20 @@ body{
     font-size: clamp(.5rem, 2.5vmin, 1.5rem);
 }
 
+.container{
+  text-align: center;
+  margin-top: 20px;
+}
+
+h1,p{
+  color: rgb(255,255,255);
+}
+
 .tile-container{
     max-width: 700px;
     background-color: rgba(0,0,0,0.5);
     margin: 0 auto;
-    margin-top: 10vh;
+    margin-top: 2em;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     border-radius: 20px;
     border: 1px solid rgba(0,0,0,0.1);
@@ -51,11 +60,12 @@ body{
 }
 
 .guess > input{
-  width: 100%;
   font-size: 2em;
   text-align: center;
   background-color: transparent;
-  border: none;
+  border: 0.1em solid rgba(255,255,255);
+  border-radius: 8px;
+  padding: 0.5em;
   color: rgba(255, 255, 255);
 }
 
