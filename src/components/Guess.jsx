@@ -1,8 +1,17 @@
 import React from 'react'
 
-const Guess = () => {
+const Guess = ({correctPokemon, guess}) => {
+    console.log(guess)
   return (
-    <div id="guess" className="guess"></div>
+    <>
+        {correctPokemon.split('').map((letter, i) => {
+                return(
+                    <span className="letter" key={i}>
+                        
+                    </span>
+                )
+        })}
+    </>
   )
 }
 

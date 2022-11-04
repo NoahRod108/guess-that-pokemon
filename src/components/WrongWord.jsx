@@ -1,9 +1,17 @@
 import React from 'react'
 
-const WrongWord = () => {
+const WrongWord = ({wrongPokemon}) => {
   return (
     <>
-        <div className="wrong-word"></div>
+        <div className="wrong-word">
+            <ul>
+                {wrongPokemon.map((p, i) => {
+                    return(
+                        <li key={i}>{p}</li>
+                    )
+                })}
+            </ul>
+        </div>
     </>
   )
 }
