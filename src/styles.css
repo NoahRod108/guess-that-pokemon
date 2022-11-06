@@ -24,6 +24,7 @@ h1,p{
 }
 
 .tile-container{
+    display: grid;
     max-width: 700px;
     background-color: rgba(0,0,0,0.5);
     margin: 0 auto;
@@ -31,6 +32,8 @@ h1,p{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     border-radius: 20px;
     border: 1px solid rgba(0,0,0,0.1);
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
 }
 
 .tile-grid{
@@ -52,8 +55,23 @@ h1,p{
   background-color: rgba(255,255,255);
 }
 
+.wrong-word-container{
+  width: 300px;
+  color: rgb(255,255,255);
+}
 
-.guess{
+.wrong-word-container h2{
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.wrong-word-container ul li{
+  list-style: none;
+  text-align: left;
+  font-size: 1.2rem;
+}
+
+.guess-container{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,7 +101,7 @@ h1,p{
 }
 
 
-.keyboard {
+.keyboard-container {
     display: grid;
     grid-template-columns: repeat(20, minmax(auto, 1.25em));
     grid-auto-rows: 3em;

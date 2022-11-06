@@ -9,12 +9,12 @@ import './styles.css';
 
 let play = true;
 let userkeyboard = '';
+let wrongPokemon = []
 
 function App() {
     const [play, setPlay] = useState(true);
     const [Pokemons, setPokemons] = useState([]);
     const [guess, setGuess] = useState('');
-    const [wrongPokemon, setWrongPokemon] = useState([]);
     const [correctPokemon, setCorrectPokemon] = useState({name: '', image: ''});
 
     useEffect(() => {
@@ -44,7 +44,7 @@ function App() {
                 }
                 
                 if(key === 'Enter'){
-                    submitGuess(userkeyboard)
+                    submitGuess(userkeyboard);
                     return;
                 }
 
@@ -57,23 +57,24 @@ function App() {
             }
         }
 
-        
-
         const submitGuess = (userkeyboard) => {
             if(userkeyboard === correctPokemon.name){
                 console.log("Win");
             }
 
             if(userkeyboard !== correctPokemon.name){
-                setWrongPokemon([...wrongPokemon, userkeyboard]);
+                wrongPokemon.push(userkeyboard);
+                userkeyboard = ''
+                setGuess(userkeyboard);
             }
+            
         }
 
         window.addEventListener('keydown', handleKeyPress);
 
         return () => window.removeEventListener('keydown', handleKeyPress);
 
-    }, [play, wrongPokemon])
+    }, [play])
 
   return (
     <div className='container'>
@@ -82,14 +83,14 @@ function App() {
             <div className="tile-grid">
                 <Tile image={correctPokemon.image}/>
             </div>
+            <div className='wrong-word-container'>
+                <WrongWord wrongPokemon={wrongPokemon} />
+            </div>
         </div>
-        <div className='wrong-word-container'>
-            <WrongWord wrongPokemon={wrongPokemon} />
-        </div>
-        <div className="guess">
+        <div className="guess-container">
             <Guess correctPokemon={correctPokemon.name} guess={guess} />
         </div>
-        <div className="keyboard">
+        <div className="keyboard-container">
             <KeyboardButtons />
         </div> 
     </div>
