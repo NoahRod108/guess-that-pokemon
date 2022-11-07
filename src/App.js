@@ -9,29 +9,32 @@ import './styles.css';
 
 let play = true;
 let userkeyboard = '';
-let wrongPokemon = []
 
 function App() {
-    const [play, setPlay] = useState(true);
+    const [play, setPlay] = useState(false);
     const [Pokemons, setPokemons] = useState([]);
+    const [wrongGuess, setWrongGuess] = useState([]);
     const [guess, setGuess] = useState('');
     const [correctPokemon, setCorrectPokemon] = useState({name: '', image: ''});
 
     useEffect(() => {
-        axios.get('https://pokeapi.co/api/v2/pokemon?limit=151').then(res => {
-            setPokemons(res.data.results.map(p => p.name));
 
-            // Randomly pick a pokemon, make new axios call https://pokeapi.co/api/v2/pokemon/${pokemonName}
-            let rand = res.data.results[Math.floor(Math.random() * res.data.results.length)];
-            axios.get(`https://pokeapi.co/api/v2/pokemon/${rand.name}`).then(res => {
-                let pokemon = {
-                        name: res.data.name,
-                        image: res.data.sprites.other.home.front_default
-                    }
-
-                setCorrectPokemon(pokemon);
+        if(!play){
+            axios.get('https://pokeapi.co/api/v2/pokemon?limit=151').then(res => {
+                setPokemons(res.data.results.map(p => p.name));
+    
+                // Randomly pick a pokemon, make new axios call https://pokeapi.co/api/v2/pokemon/${pokemonName}
+                let rand = res.data.results[Math.floor(Math.random() * res.data.results.length)];
+                axios.get(`https://pokeapi.co/api/v2/pokemon/${rand.name}`).then(res => {
+                    let pokemon = {
+                            name: res.data.name,
+                            image: res.data.sprites.other.home.front_default
+                        }
+    
+                    setCorrectPokemon(pokemon);
+                })
             })
-        })
+        }
         
         const handleKeyPress = (e) => {
             const {key} = e;
@@ -60,12 +63,13 @@ function App() {
         const submitGuess = (userkeyboard) => {
             if(userkeyboard === correctPokemon.name){
                 console.log("Win");
+                setPlay(false);
             }
 
             if(userkeyboard !== correctPokemon.name){
-                wrongPokemon.push(userkeyboard);
-                userkeyboard = ''
-                setGuess(userkeyboard);
+                setWrongGuess([...wrongGuess, userkeyboard]);
+                userkeyboard = '';
+                setGuess('');
             }
             
         }
@@ -74,7 +78,9 @@ function App() {
 
         return () => window.removeEventListener('keydown', handleKeyPress);
 
-    }, [play])
+    }, [play, wrongGuess, guess])
+
+    console.log(userkeyboard)
 
   return (
     <div className='container'>
@@ -84,14 +90,14 @@ function App() {
                 <Tile image={correctPokemon.image}/>
             </div>
             <div className='wrong-word-container'>
-                <WrongWord wrongPokemon={wrongPokemon} />
+                <WrongWord wrongPokemon={wrongGuess} />
             </div>
         </div>
         <div className="guess-container">
-            <Guess correctPokemon={correctPokemon.name} guess={guess} />
+            {play && <Guess correctPokemon={correctPokemon.name} guess={guess} />}
         </div>
         <div className="keyboard-container">
-            <KeyboardButtons />
+            {!play ? <button onClick={() => setPlay(true)}>Start Game</button> : <KeyboardButtons />}
         </div> 
     </div>
   );
