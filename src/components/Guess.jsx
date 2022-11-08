@@ -5,19 +5,20 @@ const Guess = ({correctPokemon, guess}) => {
     <>
         {correctPokemon.split('').map((letter, i) => {
             return(
-                <span className="letter" key={i} id={`letter-${i}`}>{!guess ? '' : 
-                    guess.split('').map((guessLetter, i) => {
-                        if(guess.length <= correctPokemon.length){
-                            document.getElementById(`letter-${i}`).innerHTML = guessLetter
-            
-                            if(document.getElementById(`letter-${i + 1}`) !== null){
-                                if(document.getElementById(`letter-${i + 1}`).innerHTML !== ''){
-                                    document.getElementById(`letter-${i + 1}`).innerHTML = '';
-                                }
-                            }
-                        }
-                    })
-                }</span>
+              <span className="letter" key={i} id={`letter-${i}`}>{!guess ? '' : 
+                  guess.split('').map((guessLetter, i) => {
+                    if(guess.length <= correctPokemon.length){
+                        document.getElementById(`letter-${i}`).innerHTML = guessLetter
+        
+                      if(document.getElementById(`letter-${i + 1}`) !== null){
+                          if(document.getElementById(`letter-${i + 1}`).innerHTML !== ''){
+                              document.getElementById(`letter-${i + 1}`).innerHTML = '';
+                          }
+                      }
+                    }
+                  })
+                }
+              </span>
             )
         })}
     </>
