@@ -12,7 +12,11 @@ for(let i = 0; i < 25; i++){
     tilesArray.push(tile);
 }
 
-const Tile = ({image}) => {
+const Tile = ({image, error}) => {
+    if(error){
+        let randTile = Math.floor(Math.random() * tilesArray.length);
+        console.log(randTile);
+    }
   return (   
     <>
         {tilesArray.map((tile) =>(
@@ -23,10 +27,10 @@ const Tile = ({image}) => {
                     backgroundPosition: `-${tile.left}px -${tile.top}px`,
                 }}>
                 <div key={tile.id} className="tile" data-state="inactive" 
-                style={{
-                    height: `${90}px`,
-                    width: `${112}px`,
-                }}>
+                    style={{
+                        height: `${90}px`,
+                        width: `${112}px`,
+                    }}>
                 </div>
             </div>
         ))}

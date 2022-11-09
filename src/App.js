@@ -41,7 +41,6 @@ function App() {
 
         const submitGuess = (userkeyboard) => {
             if(userkeyboard === correctPokemon.name){
-                console.log("Win");
                 setPlay(false);
             }
 
@@ -93,7 +92,7 @@ function App() {
             {play && <Guess correctPokemon={correctPokemon.name} guess={guess} />}
         </div>
         <div className="keyboard-container">
-            {!play ? <button onClick={() => startGame()}>Start Game</button> : <KeyboardButtons />}
+            {!play ? <button className='start-button' onClick={() => startGame()}>Start Game</button> : <KeyboardButtons />}
         </div> 
     </div>
   );

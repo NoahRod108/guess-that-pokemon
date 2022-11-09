@@ -1,22 +1,16 @@
 import React from 'react'
 
 const Guess = ({correctPokemon, guess}) => {
+    let guessLetters = guess.split('');
+    let correctPokemonLetters = correctPokemon.split('');
+    
   return (
     <>
-        {correctPokemon.split('').map((letter, i) => {
+        {correctPokemonLetters.map((letter, i) => {
             return(
-              <span className="letter" key={i} id={`letter-${i}`}>{!guess ? '' : 
-                  guess.split('').map((guessLetter, i) => {
-                    if(guess.length <= correctPokemon.length){
-                        document.getElementById(`letter-${i}`).innerHTML = guessLetter
-        
-                      if(document.getElementById(`letter-${i + 1}`) !== null){
-                          if(document.getElementById(`letter-${i + 1}`).innerHTML !== ''){
-                              document.getElementById(`letter-${i + 1}`).innerHTML = '';
-                          }
-                      }
-                    }
-                  })
+              <span className="letter" key={i} id={`letter-${i}`}>
+                {
+                    guessLetters[i]
                 }
               </span>
             )
