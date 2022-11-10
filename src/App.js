@@ -13,9 +13,17 @@ function App() {
     const [wrongGuess, setWrongGuess] = useState([]);
     const [guess, setGuess] = useState('');
     const [correctPokemon, setCorrectPokemon] = useState({name: '', image: ''});
+    const [attempts, setAttempts] = useState(0);
+    const [activeTiles, setActiveTiles] = useState([]);
 
     useEffect(() => {
         let userkeyboard = '';
+
+        for(let i = 0; i < 5; i++){
+            let randTile = Math.floor(Math.random() * 25);
+            setActiveTiles([...activeTiles, randTile]);
+        }
+
         const handleKeyPress = (e) => {
             const {key} = e;
 
@@ -46,6 +54,7 @@ function App() {
 
             if(userkeyboard !== correctPokemon.name){
                 setWrongGuess([...wrongGuess, userkeyboard]);
+                setAttempts(attempts + 1);
             }
 
             userkeyboard = '';
@@ -56,7 +65,7 @@ function App() {
 
         return () => window.removeEventListener('keydown', handleKeyPress);
 
-    }, [play, wrongGuess, correctPokemon.name])
+    }, [play, wrongGuess, correctPokemon.name, attempts])
 
     const startGame = () => {
         axios.get('https://pokeapi.co/api/v2/pokemon?limit=151').then(res => {
@@ -81,9 +90,7 @@ function App() {
     <div className='container'>
         <Header />
         <div className="tile-container">
-            <div className="tile-grid">
-                <Tile image={correctPokemon.image}/>
-            </div>
+            <Tile image={correctPokemon.image} activeTiles={activeTiles}/>
             <div className='wrong-word-container'>
                 <WrongWord wrongPokemon={wrongGuess} />
             </div>
