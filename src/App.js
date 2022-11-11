@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Guess from './components/Guess';
 import Header from './components/Header';
 import KeyboardButtons from './components/KeyboardButtons';
+import Notification from './components/Notification';
 import Tile from './components/Tile';
 import WrongWord from './components/WrongWord';
 import './styles.css';
@@ -11,31 +12,49 @@ function App() {
     const [play, setPlay] = useState(false);
     const [Pokemons, setPokemons] = useState([]);
     const [wrongGuess, setWrongGuess] = useState([]);
+    const [activeTiles, setActiveTiles] = useState([]);
     const [guess, setGuess] = useState('');
+    const [notification, setNotification] = useState({});
     const [correctPokemon, setCorrectPokemon] = useState({name: '', image: ''});
     const [attempts, setAttempts] = useState(0);
-    const [activeTiles, setActiveTiles] = useState([]);
 
     useEffect(() => {
         let userkeyboard = '';
+        let randTilesArray = [];
 
-        for(let i = 0; i < 5; i++){
-            let randTile = Math.floor(Math.random() * 25);
-            setActiveTiles([...activeTiles, randTile]);
+        const randomTiles = () => {
+            const set = new Set();
+            
+            while(set.size < 5){
+                set.add(Math.floor(Math.random() * 25));
+            }
+
+            set.forEach(function(value){
+                randTilesArray.push(value);
+            })
+
+            setActiveTiles(randTilesArray);
+            
+            return randTilesArray;
         }
-
+        
+        randomTiles();
+        
         const handleKeyPress = (e) => {
             const {key} = e;
 
             if(play){
                 if(key.match(/^[a-z]$/)){
                     userkeyboard += key;
+                    userkeyboard = userkeyboard.substring(0, correctPokemon.name.length)
                     setGuess(userkeyboard);
                     return;
                 }
                 
                 if(key === 'Enter'){
-                    submitGuess(userkeyboard);
+                    if(userkeyboard !== ''){
+                        submitGuess(userkeyboard);
+                    }
                     return;
                 }
 
@@ -47,13 +66,32 @@ function App() {
             }
         }
 
+        const checkGuess = (userkeyboard) => {
+            if(wrongGuess.includes(userkeyboard)){
+                setNotification({show: true, type:'same_guess'})
+                return false;
+            }
+
+            if(!Pokemons.includes(userkeyboard)){
+                setNotification({show: true, type:'wrong_generation'})
+                setWrongGuess([...wrongGuess, userkeyboard])
+                return false;
+            }
+
+            setNotification({show: false, type:''})
+            return true;
+        }
+
         const submitGuess = (userkeyboard) => {
             if(userkeyboard === correctPokemon.name){
                 setPlay(false);
             }
 
             if(userkeyboard !== correctPokemon.name){
-                setWrongGuess([...wrongGuess, userkeyboard]);
+                randomTiles();
+                if(checkGuess(userkeyboard)){
+                    setWrongGuess([...wrongGuess, userkeyboard])
+                }
                 setAttempts(attempts + 1);
             }
 
@@ -90,17 +128,18 @@ function App() {
     <div className='container'>
         <Header />
         <div className="tile-container">
-            <Tile image={correctPokemon.image} activeTiles={activeTiles}/>
+            <Tile image={correctPokemon.image} activeTiles={activeTiles} play={play} />
             <div className='wrong-word-container'>
                 <WrongWord wrongPokemon={wrongGuess} />
             </div>
         </div>
+            <Notification status={notification} />
         <div className="guess-container">
             {play && <Guess correctPokemon={correctPokemon.name} guess={guess} />}
         </div>
         <div className="keyboard-container">
             {!play ? <button className='start-button' onClick={() => startGame()}>Start Game</button> : <KeyboardButtons />}
-        </div> 
+        </div>
     </div>
   );
 }

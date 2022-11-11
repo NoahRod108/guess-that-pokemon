@@ -20,7 +20,7 @@ body{
 }
 
 h1,p{
-  color: rgb(255,255,255);
+    color: rgb(255,255,255);
 }
 
 .tile-container{
@@ -51,6 +51,7 @@ h1,p{
     object-fit: fill;
     border: 0.05em solid rgba(255,255,255);
 }
+
 .tile .inactive{
   background-color: rgba(255,255,255);
 }
@@ -68,7 +69,7 @@ h1,p{
 .wrong-word-container ul li{
   list-style: none;
   text-align: left;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 
 .guess-container{
@@ -84,6 +85,16 @@ h1,p{
     color: rgb(255,255,255);
     font-size: 32px;
     border-bottom: .1em solid rgba(255,0,0,0.8);
+}
+
+.notification{
+    margin: 0 auto;
+    margin-top: 2rem;
+    border-radius: 8px;
+    padding: .8rem;
+    color: rgba(255,255,255, 0.8);
+    width: 500px;
+    background-color: rgba(0,0,0, 0.8);;
 }
 
 .keyboard-container {

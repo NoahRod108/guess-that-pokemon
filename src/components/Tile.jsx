@@ -12,16 +12,7 @@ for(let i = 0; i < 25; i++){
     tilesArray.push(tile);
 }
 
-const Tile = ({image, activeTiles}) => {
-    // if(error){
-    //     let randTile = Math.floor(Math.random() * tilesArray.length);
-    //     console.log(randTile);
-    // }
-
-
-    // After every enter randomize which 5 squares are shown
-    console.log(activeTiles)
-
+const Tile = ({image, activeTiles, play}) => {
     return (   
     <div data-guess-grid className='tile-grid'>
         {tilesArray.map((tile, i) =>(
@@ -31,11 +22,12 @@ const Tile = ({image, activeTiles}) => {
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: `-${tile.left}px -${tile.top}px`,
                 }}>
-                <div key={tile.id} className={activeTiles[i] === i ? "active" : "inactive"}
+                <div key={tile.id} className={activeTiles.includes(tile.id) && play ? "active" : "inactive"}
                     style={{
                         height: `${90}px`,
                         width: `${112}px`,
                     }}>
+                       {}
                 </div>
             </div>
         ))}
