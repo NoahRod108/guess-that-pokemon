@@ -154,7 +154,7 @@ function App() {
             </div>
         </div>
         <div className="popup-container">
-            <Popup pokemon={correctPokemon.name}/>
+            <Popup {...correctPokemon}/>
         </div>
     </>
   );
