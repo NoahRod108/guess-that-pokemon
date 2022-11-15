@@ -1,12 +1,24 @@
-import React from 'react'
+import { useEffect, useState } from 'react';
 
 const Notification = ({status}) => {
-  return (
-    <>
-        {status.show && status.type === 'wrong_gen' ? <div className='notification'>Wrong generation or check your spelling!</div> : <div></div>}
-        {status.show && status.type === 'same_guess' ?  <div className='notification'>You already made that guess!</div> : <div></div>}
-    </>
-  )
+    const [show, setShow] = useState(true);
+
+    useEffect(() =>{
+        const timer = setTimeout(() =>{
+            setShow(false);
+        }, 5000)
+
+        return () => clearTimeout(timer);
+    },[])
+
+    if(!show){
+        return <div></div>;
+    }
+    
+    return (
+        status.type === 'wrong_generation' ? <div className='notification'>Wrong generation or check your spelling!</div> : 
+        <div className='notification'>You already made that guess!</div>
+    );
 }
 
 export default Notification

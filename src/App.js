@@ -7,15 +7,16 @@ import Notification from './components/Notification';
 import Tile from './components/Tile';
 import WrongWord from './components/WrongWord';
 import './styles.css';
+import Popup from './components/Popup';
 
 function App() {
     const [play, setPlay] = useState(false);
     const [Pokemons, setPokemons] = useState([]);
     const [wrongGuess, setWrongGuess] = useState([]);
     const [activeTiles, setActiveTiles] = useState([]);
-    const [guess, setGuess] = useState('');
     const [notification, setNotification] = useState({});
     const [correctPokemon, setCorrectPokemon] = useState({name: '', image: ''});
+    const [guess, setGuess] = useState('');
     const [attempts, setAttempts] = useState(0);
 
     useEffect(() => {
@@ -40,6 +41,7 @@ function App() {
         
         randomTiles();
         
+        // Handle keypress to type on virtual keyboard
         const handleKeyPress = (e) => {
             const {key} = e;
 
@@ -66,6 +68,7 @@ function App() {
             }
         }
 
+        // Check if notification needs to be displayed
         const checkGuess = (userkeyboard) => {
             if(wrongGuess.includes(userkeyboard)){
                 setNotification({show: true, type:'same_guess'})
@@ -77,11 +80,12 @@ function App() {
                 setWrongGuess([...wrongGuess, userkeyboard])
                 return false;
             }
-
-            setNotification({show: false, type:''})
+            
+            setNotification({show: false, type:''});
             return true;
         }
 
+        // Check if guess is the correct pokemon
         const submitGuess = (userkeyboard) => {
             if(userkeyboard === correctPokemon.name){
                 setPlay(false);
@@ -105,6 +109,7 @@ function App() {
 
     }, [play, wrongGuess, correctPokemon.name, attempts])
 
+    // function to call API and populate pokemon list
     const startGame = () => {
         axios.get('https://pokeapi.co/api/v2/pokemon?limit=151').then(res => {
             setPokemons(res.data.results.map(p => p.name));
@@ -124,23 +129,34 @@ function App() {
         setPlay(true);
     }
 
+    if(notification.show){
+        setTimeout(() =>{
+            setNotification({show: false, type:''})
+        }, 5000)
+    }
+
   return (
-    <div className='container'>
-        <Header />
-        <div className="tile-container">
-            <Tile image={correctPokemon.image} activeTiles={activeTiles} play={play} />
-            <div className='wrong-word-container'>
-                <WrongWord wrongPokemon={wrongGuess} />
+    <>
+        <div className='container'>
+            <Header />
+            <div className="tile-container">
+                <Tile image={correctPokemon.image} activeTiles={activeTiles} play={play} />
+                <div className='wrong-word-container'>
+                    <WrongWord wrongPokemon={wrongGuess} />
+                </div>
+            </div>
+            {notification.show && <Notification status={notification} />}
+            <div className="guess-container">
+                {play && <Guess correctPokemon={correctPokemon.name} guess={guess} />}
+            </div>
+            <div className="keyboard-container">
+                {!play ? <button className='start-button' onClick={() => startGame()}>Start Game</button> : <KeyboardButtons />}
             </div>
         </div>
-            <Notification status={notification} />
-        <div className="guess-container">
-            {play && <Guess correctPokemon={correctPokemon.name} guess={guess} />}
+        <div className="popup-container">
+            <Popup pokemon={correctPokemon.name}/>
         </div>
-        <div className="keyboard-container">
-            {!play ? <button className='start-button' onClick={() => startGame()}>Start Game</button> : <KeyboardButtons />}
-        </div>
-    </div>
+    </>
   );
 }
 
