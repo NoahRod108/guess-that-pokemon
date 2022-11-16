@@ -11,6 +11,7 @@ import Popup from './components/Popup';
 
 function App() {
     const [play, setPlay] = useState(false);
+    const [win, setWin] = useState(false);
     const [Pokemons, setPokemons] = useState([]);
     const [wrongGuess, setWrongGuess] = useState([]);
     const [activeTiles, setActiveTiles] = useState([]);
@@ -88,6 +89,7 @@ function App() {
         // Check if guess is the correct pokemon
         const submitGuess = (userkeyboard) => {
             if(userkeyboard === correctPokemon.name){
+                setWin(true);
                 setPlay(false);
             }
 
@@ -153,9 +155,9 @@ function App() {
                 {!play ? <button className='start-button' onClick={() => startGame()}>Start Game</button> : <KeyboardButtons />}
             </div>
         </div>
-        <div className="popup-container">
+       {win && <div className="popup-container">
             <Popup {...correctPokemon}/>
-        </div>
+        </div>}
     </>
   );
 }

@@ -97,7 +97,7 @@ h1,p{
     background-color: rgba(0,0,0, 0.8);;
 }
 
-.keyboard-container {
+.keyboard-container{
     display: grid;
     grid-template-columns: repeat(20, minmax(auto, 1.25em));
     grid-auto-rows: 3em;
@@ -138,7 +138,7 @@ h1,p{
     transform: scale(1.1);
 }
 
-  .key {
+  .key{
     font-size: inherit;
     grid-column: span 2;
     border: none;
@@ -165,25 +165,25 @@ h1,p{
   }
 
 
-  .key.large {
+  .key.large{
     grid-column: span 3;
   }
 
-  .popup-container {
-    background-color: rgba(0, 0, 0, 0.4);
+  .popup-container{
+    background-color: rgba(0, 0, 0, 0.6);
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     display: flex;
-    /* display: none; */
     align-items: center;
     justify-content: center;
   }
   
-  .popup {
+  .popup{
     background: rgba(255,0,0);
+    color: #fff;
     border-radius: 5px;
     box-shadow: 0 15px 10px 3px rgba(0, 0, 0, 0.2);
     padding: 20px;
@@ -191,6 +191,44 @@ h1,p{
     width: 400px;
     height: 600px;
     overflow: hidden;
+  }
+
+  .popup .btn-section{
+    display: flex;
+  }
+
+  .popup .sensor{
+    background-color: rgb(18,201,255);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: .4rem solid rgb(180,180,180);
+    filter: drop-shadow(0 2px 3px rgb(0,0,0));
+  }
+  
+  .popup .pokedex-light{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    filter: drop-shadow(0 2px 3px rgb(0,0,0));
+    margin: 0 8px;
+  }
+
+  .popup .pokedex-light:nth-child(2){
+    background-color: rgb(255,0,0);
+  }
+  .popup .pokedex-light:nth-child(3){
+    background-color: rgb(255,255,0);
+  }
+  .popup .pokedex-light:nth-child(4){
+    background-color: rgb(0,255,0);
+  }
+
+  .popup-screen{
+    background: rgb(240,240,240);
+    border-radius: 5px;
+    border: .7rem solid rgb(180,180,180);
+    margin: 12px 0;
   }
 
   .popup img{
@@ -201,15 +239,16 @@ h1,p{
   .popup button {
     cursor: pointer;
     background-color: #fff;
-    color: #2980b9;
     border: 0;
     margin-top: 20px;
     padding: 12px 20px;
     font-size: 16px;
+    transition: transform .2s;
+    border-radius: 8px;
   }
   
-  .popup button:active {
-    transform: scale(0.98);
+  .popup button:hover {
+    transform: scale(1.1);
   }
   
   .popup button:focus {
