@@ -41,6 +41,33 @@ function App() {
         }
         
         randomTiles();
+
+        const handleMouseClick = (e) => {
+
+            if(play){
+                if(e.target.matches("[data-key]")){
+                    // userkeyboard += key;
+                    // userkeyboard = userkeyboard.substring(0, correctPokemon.name.length)
+                    // setGuess(userkeyboard);
+                    // return;
+
+                    console.log(e)
+                }
+                
+                // if(key === 'Enter'){
+                //     if(userkeyboard !== ''){
+                //         submitGuess(userkeyboard);
+                //     }
+                //     return;
+                // }
+
+                // if(key === 'Backspace' || 'Delete'){
+                //     userkeyboard = userkeyboard.slice(0, -1);
+                //     setGuess(userkeyboard);
+                //     return;
+                // }
+            }
+        }
         
         // Handle keypress to type on virtual keyboard
         const handleKeyPress = (e) => {
@@ -106,6 +133,7 @@ function App() {
         }
 
         window.addEventListener('keydown', handleKeyPress);
+        window.addEventListener('click', handleMouseClick);
 
         return () => window.removeEventListener('keydown', handleKeyPress);
 
