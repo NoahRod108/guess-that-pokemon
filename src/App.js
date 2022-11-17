@@ -137,6 +137,10 @@ function App() {
         }, 5000)
     }
 
+    function playAgain(){
+        setWin(false);
+    }
+
   return (
     <>
         <div className='container'>
@@ -155,9 +159,11 @@ function App() {
                 {!play ? <button className='start-button' onClick={() => startGame()}>Start Game</button> : <KeyboardButtons />}
             </div>
         </div>
-       {win && <div className="popup-container">
-            <Popup {...correctPokemon}/>
-        </div>}
+        {
+        win && <div className="popup-container">
+            <Popup {...correctPokemon} playAgain={playAgain}/>
+        </div>
+        }
     </>
   );
 }

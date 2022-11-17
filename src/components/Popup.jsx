@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Popup = ({name, image}) => {
+const Popup = ({name, image, playAgain}) => {
   return (
     <div className="popup">
         <div className="btn-section">
@@ -20,7 +20,7 @@ const Popup = ({name, image}) => {
         <div className="pokedex-btn"></div>
         <div className="pokedex-btn"></div>
         <div className="pokedex-btn"></div>
-        <button className="play-button">Play Again!</button>
+        <button className="play-button" onClick={playAgain}>Play Again!</button>
     </div>
   )
 }
