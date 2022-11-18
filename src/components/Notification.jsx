@@ -16,8 +16,10 @@ const Notification = ({status}) => {
     }
     
     return (
-        status.type === 'wrong_generation' ? <div className='notification'>Wrong generation or check your spelling!</div> : 
-        <div className='notification'>You already made that guess!</div>
+        <div className="notification-container">
+            {status.type === 'wrong_generation' ? <div className='notification'>Wrong generation or check your spelling!</div> : 
+            <div className='notification'>You already made that guess!</div>}
+        </div>
     );
 }
 

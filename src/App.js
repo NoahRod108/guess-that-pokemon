@@ -8,6 +8,7 @@ import Tile from './components/Tile';
 import WrongWord from './components/WrongWord';
 import './styles.css';
 import Popup from './components/Popup';
+import { useMediaQuery } from 'react-responsive';
 
 function App() {
     const [play, setPlay] = useState(false);
@@ -19,6 +20,7 @@ function App() {
     const [correctPokemon, setCorrectPokemon] = useState({name: '', image: ''});
     const [guess, setGuess] = useState('');
     const [attempts, setAttempts] = useState(0);
+    const isMobile = useMediaQuery({ query: `(max-width: 670px)` });
 
     useEffect(() => {
         let userkeyboard = '';
@@ -27,13 +29,23 @@ function App() {
         const randomTiles = () => {
             const set = new Set();
             
-            while(set.size < 5){
-                set.add(Math.floor(Math.random() * 25));
+            if(isMobile){
+                while(set.size < 3){
+                    set.add(Math.floor(Math.random() * 18));
+                }
+    
+                set.forEach(function(value){
+                    randTilesArray.push(value);
+                })
+            }else{
+                while(set.size < 5){
+                    set.add(Math.floor(Math.random() * 25));
+                }
+    
+                set.forEach(function(value){
+                    randTilesArray.push(value);
+                })
             }
-
-            set.forEach(function(value){
-                randTilesArray.push(value);
-            })
 
             setActiveTiles(randTilesArray);
             
@@ -43,29 +55,28 @@ function App() {
         randomTiles();
 
         const handleMouseClick = (e) => {
+            e.preventDefault();
 
             if(play){
                 if(e.target.matches("[data-key]")){
-                    // userkeyboard += key;
-                    // userkeyboard = userkeyboard.substring(0, correctPokemon.name.length)
-                    // setGuess(userkeyboard);
-                    // return;
-
-                    console.log(e)
+                    userkeyboard += e.target.getAttribute("data-key");;
+                    userkeyboard = userkeyboard.substring(0, correctPokemon.name.length)
+                    setGuess(userkeyboard);
+                    return;
                 }
                 
-                // if(key === 'Enter'){
-                //     if(userkeyboard !== ''){
-                //         submitGuess(userkeyboard);
-                //     }
-                //     return;
-                // }
+                if(e.target.getAttribute("data-enter")){
+                    if(userkeyboard !== ''){
+                        submitGuess(userkeyboard);
+                    }
+                    return;
+                }
 
-                // if(key === 'Backspace' || 'Delete'){
-                //     userkeyboard = userkeyboard.slice(0, -1);
-                //     setGuess(userkeyboard);
-                //     return;
-                // }
+                if(e.target.getAttribute("data-delete")){
+                    userkeyboard = userkeyboard.slice(0, -1);
+                    setGuess(userkeyboard);
+                    return;
+                }
             }
         }
         
@@ -118,6 +129,7 @@ function App() {
             if(userkeyboard === correctPokemon.name){
                 setWin(true);
                 setPlay(false);
+                setWrongGuess([]);
             }
 
             if(userkeyboard !== correctPokemon.name){
@@ -135,8 +147,10 @@ function App() {
         window.addEventListener('keydown', handleKeyPress);
         window.addEventListener('click', handleMouseClick);
 
-        return () => window.removeEventListener('keydown', handleKeyPress);
-
+        return () => {
+            window.removeEventListener('keydown', handleKeyPress);
+            window.removeEventListener('click', handleMouseClick);
+        }
     }, [play, wrongGuess, correctPokemon.name, attempts])
 
     // function to call API and populate pokemon list
@@ -167,6 +181,7 @@ function App() {
 
     function playAgain(){
         setWin(false);
+        setAttempts(0);
     }
 
   return (
@@ -175,9 +190,9 @@ function App() {
             <Header />
             <div className="tile-container">
                 <Tile image={correctPokemon.image} activeTiles={activeTiles} play={play} />
-                <div className='wrong-word-container'>
-                    <WrongWord wrongPokemon={wrongGuess} />
-                </div>
+            </div>
+            <div className='wrong-word-container'>
+                <WrongWord wrongPokemon={wrongGuess} />
             </div>
             {notification.show && <Notification status={notification} />}
             <div className="guess-container">
@@ -187,9 +202,10 @@ function App() {
                 {!play ? <button className='start-button' onClick={() => startGame()}>Start Game</button> : <KeyboardButtons />}
             </div>
         </div>
+
         {
         win && <div className="popup-container">
-            <Popup {...correctPokemon} playAgain={playAgain}/>
+            <Popup {...correctPokemon} playAgain={playAgain} attempts={attempts}/>
         </div>
         }
     </>
