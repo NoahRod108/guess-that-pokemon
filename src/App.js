@@ -59,8 +59,8 @@ function App() {
 
             if(play){
                 if(e.target.matches("[data-key]")){
-                    userkeyboard += e.target.getAttribute("data-key");;
-                    userkeyboard = userkeyboard.substring(0, correctPokemon.name.length)
+                    userkeyboard += e.target.getAttribute("data-key");
+                    userkeyboard = userkeyboard.substring(0, correctPokemon.name.length);
                     setGuess(userkeyboard);
                     return;
                 }
