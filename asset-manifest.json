@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/guess-that-pokemon/static/css/main.ff022c25.css",
+    "main.js": "/guess-that-pokemon/static/js/main.8784806f.js",
+    "index.html": "/guess-that-pokemon/index.html",
+    "main.ff022c25.css.map": "/guess-that-pokemon/static/css/main.ff022c25.css.map",
+    "main.8784806f.js.map": "/guess-that-pokemon/static/js/main.8784806f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ff022c25.css",
+    "static/js/main.8784806f.js"
+  ]
+}
