@@ -263,4 +263,22 @@ h1,p{
         grid-template-columns: repeat(3, 6rem);
         padding: 1rem;
     }
+
+    .keyboard-container{
+      grid-template-columns: repeat(20, minmax(auto, 2em));
+      grid-auto-rows: 4em;
+    }
+
+    .start-button{
+      font-size: 1.4em;
+  }
+  
+  .start-button:hover{
+      background-color: rgba(255,0,0,1.2);
+      transform: scale(1.1);
+  }
+  
+    .key{
+      font-size: 1.4em;
+    }
   }
