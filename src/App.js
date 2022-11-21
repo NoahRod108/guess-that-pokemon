@@ -31,7 +31,7 @@ function App() {
             
             if(isMobile){
                 while(set.size < 3){
-                    set.add(Math.floor(Math.random() * 18));
+                    set.add(Math.floor(Math.random() * 15));
                 }
     
                 set.forEach(function(value){
@@ -66,7 +66,7 @@ function App() {
                 }
                 
                 if(e.target.getAttribute("data-enter")){
-                    if(userkeyboard !== ''){
+                    if(userkeyboard !== '' && userkeyboard.length === correctPokemon.name.length){
                         submitGuess(userkeyboard);
                     }
                     return;
@@ -93,7 +93,7 @@ function App() {
                 }
                 
                 if(key === 'Enter'){
-                    if(userkeyboard !== ''){
+                    if(userkeyboard !== '' && userkeyboard.length === correctPokemon.name.length){
                         submitGuess(userkeyboard);
                     }
                     return;
@@ -161,8 +161,14 @@ function App() {
             // Randomly pick a pokemon, make new axios call https://pokeapi.co/api/v2/pokemon/${pokemonName}
             let rand = res.data.results[Math.floor(Math.random() * res.data.results.length)];
             axios.get(`https://pokeapi.co/api/v2/pokemon/${rand.name}`).then(res => {
+                let pokemonName = res.data.name;        
+
+                if(res.data.id === 29){
+                    pokemonName = res.data.name.substring(0, res.data.name.length - 2);
+                }
+
                 let pokemon = {
-                        name: res.data.name,
+                        name: pokemonName,
                         image: res.data.sprites.other.home.front_default
                     }
 
