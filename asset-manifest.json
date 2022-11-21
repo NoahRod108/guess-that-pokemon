@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/guess-that-pokemon/static/css/main.ee5ca89c.css",
-    "main.js": "/guess-that-pokemon/static/js/main.c447377c.js",
+    "main.css": "/guess-that-pokemon/static/css/main.3eca8cb0.css",
+    "main.js": "/guess-that-pokemon/static/js/main.36cbb2bd.js",
     "index.html": "/guess-that-pokemon/index.html",
-    "main.ee5ca89c.css.map": "/guess-that-pokemon/static/css/main.ee5ca89c.css.map",
-    "main.c447377c.js.map": "/guess-that-pokemon/static/js/main.c447377c.js.map"
+    "main.3eca8cb0.css.map": "/guess-that-pokemon/static/css/main.3eca8cb0.css.map",
+    "main.36cbb2bd.js.map": "/guess-that-pokemon/static/js/main.36cbb2bd.js.map"
   },
   "entrypoints": [
-    "static/css/main.ee5ca89c.css",
-    "static/js/main.c447377c.js"
+    "static/css/main.3eca8cb0.css",
+    "static/js/main.36cbb2bd.js"
   ]
 }
