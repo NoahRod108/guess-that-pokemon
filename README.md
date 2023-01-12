@@ -18,7 +18,7 @@ npm start
 ### API
 https://pokeapi.co/
 
-### Future Plans
+## Future Plans
 * Adding pokedex for reference
 * Personal pokedex to see which pokemon you caught while playing
 * Difficulty selection
